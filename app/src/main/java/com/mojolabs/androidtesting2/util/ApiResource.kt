@@ -6,31 +6,31 @@ enum class Status {
     ERROR
 }
 
-data class Resource<out T>(
+data class ApiResource<out T>(
     val status: Status,
     val data: T?,
     val message: String?
 ) {
     companion object {
 
-        fun <T> loading(data: T?): Resource<T> {
-            return Resource(
+        fun <T> loading(data: T?): ApiResource<T> {
+            return ApiResource(
                 status = Status.LOADING,
                 data = data,
                 message = null
             )
         }
 
-        fun <T> success(data: T?): Resource<T> {
-            return Resource(
+        fun <T> success(data: T?): ApiResource<T> {
+            return ApiResource(
                 status = Status.SUCCESS,
                 data = data,
                 message = null
             )
         }
 
-        fun <T> error(msg: String, data: T? = null): Resource<T> {
-            return Resource(
+        fun <T> error(msg: String, data: T? = null): ApiResource<T> {
+            return ApiResource(
                 status = Status.ERROR,
                 data = data,
                 message = msg

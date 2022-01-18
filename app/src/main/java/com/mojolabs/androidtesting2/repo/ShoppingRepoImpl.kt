@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import com.mojolabs.androidtesting2.data.local.ShoppingDao
 import com.mojolabs.androidtesting2.data.local.ShoppingItem
 import com.mojolabs.androidtesting2.data.remote.PixabayApi
-import com.mojolabs.androidtesting2.util.Resource
+import com.mojolabs.androidtesting2.util.ApiResource
 import javax.inject.Inject
 
 class ShoppingRepoImpl
@@ -29,18 +29,18 @@ class ShoppingRepoImpl
         return shoppingDao.observeTotalPrice()
     }
 
-    override suspend fun searchForImage(imageQuery: String) =
+    override suspend fun searchImage(imageQuery: String) =
         try {
-            val apiResponse = pixabayApi.searchForImage(imageQuery)
+            val apiResponse = pixabayApi.searchImage(imageQuery)
 
             if (apiResponse.isSuccessful) {
                 apiResponse.body()?.let {
-                    return@let Resource.success(it)
-                } ?: Resource.error("Error 1")
+                    return@let ApiResource.success(it)
+                } ?: ApiResource.error("Error 1")
             } else {
-                Resource.error("Error 2")
+                ApiResource.error("Error 2")
             }
         } catch (exception: Exception) {
-            Resource.error(msg = "Error 2")
+            ApiResource.error(msg = "Error 2")
         }
 }

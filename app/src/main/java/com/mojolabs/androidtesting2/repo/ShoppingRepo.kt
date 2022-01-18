@@ -3,7 +3,7 @@ package com.mojolabs.androidtesting2.repo
 import androidx.lifecycle.LiveData
 import com.mojolabs.androidtesting2.data.local.ShoppingItem
 import com.mojolabs.androidtesting2.data.remote.responses.ImageResponse
-import com.mojolabs.androidtesting2.util.Resource
+import com.mojolabs.androidtesting2.util.ApiResource
 
 interface ShoppingRepo {
 
@@ -15,5 +15,5 @@ interface ShoppingRepo {
 
     fun observeTotalPrice(): LiveData<Float>
 
-    suspend fun searchForImage(imageQuery: String): Resource<ImageResponse>
+    suspend fun searchImage(imageQuery: String): ApiResource<ImageResponse>
 }

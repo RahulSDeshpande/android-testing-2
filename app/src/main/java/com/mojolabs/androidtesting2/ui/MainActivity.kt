@@ -1,7 +1,8 @@
-package com.mojolabs.androidtesting2
+package com.mojolabs.androidtesting2.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import com.mojolabs.androidtesting2.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.mojolabs.androidtesting2.data.local.ShoppingItem
 import com.mojolabs.androidtesting2.data.remote.responses.ImageResponse
-import com.mojolabs.androidtesting2.util.Resource
+import com.mojolabs.androidtesting2.util.ApiResource
 
 class FakeShoppingRepo : ShoppingRepo {
 
@@ -42,11 +42,11 @@ class FakeShoppingRepo : ShoppingRepo {
         return observableTotalPrice
     }
 
-    override suspend fun searchForImage(imageQuery: String): Resource<ImageResponse> {
+    override suspend fun searchImage(imageQuery: String): ApiResource<ImageResponse> {
         return if (shouldReturnNetworkError) {
-            Resource.error(msg = "Network error.")
+            ApiResource.error(msg = "Network error.")
         } else {
-            Resource.success(
+            ApiResource.success(
                 ImageResponse(
                     hits = listOf(),
                     total = 0,
