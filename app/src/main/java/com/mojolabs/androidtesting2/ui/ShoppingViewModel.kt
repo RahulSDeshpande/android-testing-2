@@ -10,6 +10,8 @@ import com.mojolabs.androidtesting2.data.remote.responses.ImageResponse
 import com.mojolabs.androidtesting2.repo.ShoppingRepo
 import com.mojolabs.androidtesting2.util.ApiResource
 import com.mojolabs.androidtesting2.util.Event
+import com.mojolabs.androidtesting2.util.MAX_NAME_LENGTH
+import com.mojolabs.androidtesting2.util.MAX_PRICE_LENGTH
 import kotlinx.coroutines.launch
 
 class ShoppingViewModel @ViewModelInject constructor(
@@ -47,9 +49,56 @@ class ShoppingViewModel @ViewModelInject constructor(
     fun insertShoppingItem(
         name: String,
         quantity: Int,
-        price: String
+        price: Float
     ) {
+        if (name.trim().isEmpty() || quantity < 1 || price <= 0) {
+            _insertShoppingItemStatus.postValue(
+                Event(content = ApiResource.error(msg = "The fields must not be empty."))
+            )
+            return
+        }
+
+        if (name.trim().length > MAX_NAME_LENGTH) {
+            _insertShoppingItemStatus.postValue(
+                Event(content = ApiResource.error(msg = "The name must not be exceed $MAX_NAME_LENGTH chars."))
+            )
+            return
+        }
+
+        if (price.toString().length > MAX_PRICE_LENGTH) {
+            _insertShoppingItemStatus.postValue(
+                Event(content = ApiResource.error(msg = "The price must not be exceed $MAX_NAME_LENGTH digits."))
+            )
+            return
+        }
+
+        val shoppingItem =
+            ShoppingItem(
+                name = name,
+                quantity = quantity,
+                price = price,
+                imageUrl = _currentImageUrl.value ?: "url"
+            )
+
+        insertShoppingItem(shoppingItem)
+
+        setCurrentImageUrl("url")
+
+        _insertShoppingItemStatus.postValue(
+            Event(ApiResource.success(data = shoppingItem))
+        )
     }
 
-    fun searchImage(imageQuery: String) {}
+    fun searchImage(imageQuery: String) {
+        if (imageQuery.isEmpty()) {
+            return
+        }
+
+        _images.value = Event(ApiResource.loading())
+
+        viewModelScope.launch {
+            val imageResponse = shoppingRepo.searchImage(imageQuery)
+            _images.value = Event(imageResponse)
+        }
+    }
 }

@@ -1,21 +1,21 @@
 package com.mojolabs.androidtesting2.util
 
-enum class Status {
+enum class ApiStatus {
     LOADING,
     SUCCESS,
     ERROR
 }
 
 data class ApiResource<out T>(
-    val status: Status,
+    val status: ApiStatus,
     val data: T?,
     val message: String?
 ) {
     companion object {
 
-        fun <T> loading(data: T?): ApiResource<T> {
+        fun <T> loading(data: T? = null): ApiResource<T> {
             return ApiResource(
-                status = Status.LOADING,
+                status = ApiStatus.LOADING,
                 data = data,
                 message = null
             )
@@ -23,7 +23,7 @@ data class ApiResource<out T>(
 
         fun <T> success(data: T?): ApiResource<T> {
             return ApiResource(
-                status = Status.SUCCESS,
+                status = ApiStatus.SUCCESS,
                 data = data,
                 message = null
             )
@@ -31,7 +31,7 @@ data class ApiResource<out T>(
 
         fun <T> error(msg: String, data: T? = null): ApiResource<T> {
             return ApiResource(
-                status = Status.ERROR,
+                status = ApiStatus.ERROR,
                 data = data,
                 message = msg
             )

@@ -5,6 +5,7 @@ import androidx.room.Room
 import com.mojolabs.androidtesting2.data.local.ShoppingDao
 import com.mojolabs.androidtesting2.data.local.ShoppingItemDatabase
 import com.mojolabs.androidtesting2.data.remote.PixabayApi
+import com.mojolabs.androidtesting2.repo.ShoppingRepo
 import com.mojolabs.androidtesting2.repo.ShoppingRepoImpl
 import com.mojolabs.androidtesting2.util.API_BASE_URL
 import com.mojolabs.androidtesting2.util.DATABASE_NAME
@@ -29,7 +30,7 @@ object AppModule {
         context,
         ShoppingItemDatabase::class.java,
         DATABASE_NAME
-    )
+    ).build()
 
     @Singleton
     @Provides
@@ -39,7 +40,7 @@ object AppModule {
     ) = ShoppingRepoImpl(
         shoppingDao = shoppingDao,
         pixabayApi = pixabayApi
-    )
+    ) as ShoppingRepo
 
     @Singleton
     @Provides
