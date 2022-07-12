@@ -1,5 +1,6 @@
 package com.mojolabs.androidtesting2.petros
 
+import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
@@ -15,7 +16,10 @@ class EngineUnitTest {
 
     @Test
     fun engineTurnsOn() {
-        engine.turnOn()
+
+        runTest {
+            engine.turnOn()
+        }
 
         assertEquals(true, engine.isTurnedOn)
         assertEquals(95, engine.temperature)
@@ -23,7 +27,9 @@ class EngineUnitTest {
 
     @Test
     fun engineTurnsOff() {
-        engine.turnOn()
+        runTest {
+            engine.turnOn()
+        }
         engine.turnOff()
 
         assertEquals(false, engine.isTurnedOn)

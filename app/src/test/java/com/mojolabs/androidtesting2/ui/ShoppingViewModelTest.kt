@@ -2,8 +2,8 @@ package com.mojolabs.androidtesting2.ui
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.google.common.truth.Truth
-import com.mojolabs.androidtesting2.MainCoroutineRule
 import com.mojolabs.androidtesting2.getOrAwaitValueTest
+import com.mojolabs.androidtesting2.petros.util.MainCoroutineRule
 import com.mojolabs.androidtesting2.repo.FakeShoppingRepo
 import com.mojolabs.androidtesting2.util.ApiStatus
 import com.mojolabs.androidtesting2.util.MAX_NAME_LENGTH
