@@ -134,4 +134,6 @@ dependencies {
     androidTestImplementation 'com.google.dagger:hilt-android-testing:2.28-alpha'
     kaptAndroidTest 'com.google.dagger:hilt-android-compiler:2.28-alpha'
 
+    testImplementation 'org.mockito:mockito-inline:2.21.0'
+    testImplementation 'com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0'
 }

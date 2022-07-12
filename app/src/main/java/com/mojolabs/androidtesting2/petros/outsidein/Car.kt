@@ -1,8 +1,14 @@
 package com.mojolabs.androidtesting2.petros.outsidein
 
-class Car(var fuel: Double) {
+import com.mojolabs.androidtesting2.petros.Engine
+
+class Car(
+    var engine: Engine,
+    var fuel: Double
+) {
 
     fun turnOn() {
         fuel -= 0.5
+        engine.turnOn()
     }
 }
