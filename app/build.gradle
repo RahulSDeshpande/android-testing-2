@@ -52,6 +52,8 @@ android {
 
 dependencies {
 
+    testImplementation project(path: ':app')
+
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
     implementation 'androidx.core:core-ktx:1.7.0'
