@@ -48,9 +48,15 @@ android {
         exclude "META-INF/AL2.0"
         exclude "META-INF/LGPL2.1"
     }
+
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
 }
 
 dependencies {
+
+    testImplementation project(path: ':app')
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
@@ -132,4 +138,10 @@ dependencies {
     androidTestImplementation 'com.google.dagger:hilt-android-testing:2.28-alpha'
     kaptAndroidTest 'com.google.dagger:hilt-android-compiler:2.28-alpha'
 
+    testImplementation 'org.mockito:mockito-inline:2.21.0'
+    testImplementation 'com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0'
+
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1'
+    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.1'
 }
